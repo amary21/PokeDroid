@@ -1,4 +1,4 @@
-package com.amary.poke.droid.ui.theme
+package com.amary.poke.droid.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 

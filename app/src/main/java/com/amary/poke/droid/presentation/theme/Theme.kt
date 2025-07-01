@@ -1,6 +1,5 @@
-package com.amary.poke.droid.ui.theme
+package com.amary.poke.droid.presentation.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
