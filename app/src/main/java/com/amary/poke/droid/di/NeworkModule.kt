@@ -25,6 +25,8 @@ val networkModule = module {
             .addConverterFactory(networkJson.asConverterFactory("application/json".toMediaType()))
             .client(get())
             .build()
-            .create<PokeApi>(PokeApi::class.java)
+    }
+    single<PokeApi> {
+        get<Retrofit>().create(PokeApi::class.java)
     }
 }

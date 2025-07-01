@@ -18,6 +18,7 @@ val localModule = module {
             .fallbackToDestructiveMigration(false)
             .build()
     }
+    single<PokeDao> { get<PokeDatabase>().pokeDao() }
 }
 
 @Database(entities = [ResultEntity::class], version = 1, exportSchema = false)
