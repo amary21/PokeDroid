@@ -12,7 +12,9 @@ internal object ListRoute {
     const val ROUTE = "list"
 }
 
-fun NavGraphBuilder.listScreen() {
+fun NavGraphBuilder.listScreen(
+    onNavigateToProfile: () -> Unit = {}
+) {
     composable(route = ListRoute.ROUTE) {
         val viewModel: ListViewModel = koinViewModel()
         val state by viewModel.state.collectAsState()
@@ -23,7 +25,8 @@ fun NavGraphBuilder.listScreen() {
 
         ListScreen(
             state = state,
-            onItemClick = { /* Handle item click */ }
+            onItemClick = { /* Handle item click */ },
+            onNavigateToProfile = onNavigateToProfile
         )
     }
 }

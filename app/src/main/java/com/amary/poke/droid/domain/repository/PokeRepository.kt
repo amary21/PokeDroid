@@ -1,7 +1,5 @@
 package com.amary.poke.droid.domain.repository
 
-import com.amary.poke.droid.data.local.entity.AuthEntity
-import com.amary.poke.droid.data.local.entity.UserEntity
 import com.amary.poke.droid.domain.model.AuthModel
 import com.amary.poke.droid.domain.model.ResultModel
 import com.amary.poke.droid.domain.model.UserModel
