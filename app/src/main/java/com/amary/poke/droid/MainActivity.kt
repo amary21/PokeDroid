@@ -13,6 +13,9 @@ import com.amary.poke.droid.presentation.list.listScreen
 import com.amary.poke.droid.presentation.list.navigateToList
 import com.amary.poke.droid.presentation.login.LoginRoute
 import com.amary.poke.droid.presentation.login.loginScreen
+import com.amary.poke.droid.presentation.login.navigateToLogin
+import com.amary.poke.droid.presentation.register.registerScreen
+import com.amary.poke.droid.presentation.register.navigateToRegister
 import com.amary.poke.droid.presentation.theme.PokeDroidTheme
 
 class MainActivity : ComponentActivity() {
@@ -36,7 +39,14 @@ fun AppNavigation(modifier: Modifier = Modifier) {
         startDestination = LoginRoute.ROUTE,
         modifier = modifier
     ) {
-        loginScreen(navController::navigateToList)
+        loginScreen(
+            onLoginSuccess = navController::navigateToList,
+            onNavigateToRegister = navController::navigateToRegister
+        )
+        registerScreen(
+            onRegisterSuccess = navController::navigateToLogin,
+            onNavigateBack = navController::popBackStack
+        )
         listScreen()
     }
 }

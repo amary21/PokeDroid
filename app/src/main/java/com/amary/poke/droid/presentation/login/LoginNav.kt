@@ -10,14 +10,16 @@ internal object LoginRoute {
 }
 
 fun NavGraphBuilder.loginScreen(
-    onLoginSuccess: () -> Unit
+    onLoginSuccess: () -> Unit,
+    onNavigateToRegister: () -> Unit
 ) {
     composable(route = LoginRoute.ROUTE) {
         val viewModel: LoginViewModel = koinViewModel()
-        
+
         LoginScreen(
             viewModel = viewModel,
-            onLoginSuccess = onLoginSuccess
+            onLoginSuccess = onLoginSuccess,
+            onNavigateToRegister = onNavigateToRegister
         )
     }
 }
