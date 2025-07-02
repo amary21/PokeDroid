@@ -12,7 +12,7 @@ class ListViewModel(
 ): ViewModel() {
 
     private val _state = MutableStateFlow<ListState>(ListState.Loading)
-    private val state = _state.asStateFlow()
+    val state = _state.asStateFlow()
 
     fun getList() = viewModelScope.launch {
         listPokemonUseCase.invoke().collect { result ->
