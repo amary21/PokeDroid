@@ -9,7 +9,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -19,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.amary.poke.droid.domain.model.ResultModel
+import com.amary.poke.droid.presentation.components.ProgressDialog
 
 @Composable
 fun ListScreen(
@@ -33,8 +33,9 @@ fun ListScreen(
         ) {
             when (state) {
                 is ListState.Loading -> {
-                    CircularProgressIndicator(
-                        modifier = Modifier.align(Alignment.Center)
+                    ProgressDialog(
+                        isShowing = true,
+                        message = "Loading Pokémon..."
                     )
                 }
 

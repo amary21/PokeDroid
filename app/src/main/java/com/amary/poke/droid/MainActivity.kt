@@ -9,8 +9,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import com.amary.poke.droid.presentation.list.ListRoute
 import com.amary.poke.droid.presentation.list.listScreen
+import com.amary.poke.droid.presentation.list.navigateToList
+import com.amary.poke.droid.presentation.login.LoginRoute
+import com.amary.poke.droid.presentation.login.loginScreen
 import com.amary.poke.droid.presentation.theme.PokeDroidTheme
 
 class MainActivity : ComponentActivity() {
@@ -31,9 +33,10 @@ fun AppNavigation(modifier: Modifier = Modifier) {
 
     NavHost(
         navController = navController,
-        startDestination = ListRoute.ROUTE,
+        startDestination = LoginRoute.ROUTE,
         modifier = modifier
     ) {
+        loginScreen(navController::navigateToList)
         listScreen()
     }
 }
