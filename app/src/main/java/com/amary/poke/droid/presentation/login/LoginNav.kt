@@ -1,5 +1,7 @@
 package com.amary.poke.droid.presentation.login
 
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
@@ -15,9 +17,11 @@ fun NavGraphBuilder.loginScreen(
 ) {
     composable(route = LoginRoute.ROUTE) {
         val viewModel: LoginViewModel = koinViewModel()
+        val state by viewModel.state.collectAsState()
 
         LoginScreen(
-            viewModel = viewModel,
+            state = state,
+            onLogin = viewModel::login,
             onLoginSuccess = onLoginSuccess,
             onNavigateToRegister = onNavigateToRegister
         )

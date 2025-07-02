@@ -18,6 +18,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -31,16 +32,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.amary.poke.droid.presentation.components.ProgressDialog
 
 @Composable
 fun RegisterScreen(
-    viewModel: RegisterViewModel,
+    state: RegisterState,
+    onRegister: (
+        username: String,
+        fullName: String,
+        email: String,
+        password: String
+    ) -> Unit,
     onRegisterSuccess: () -> Unit,
     onNavigateBack: () -> Unit
 ) {
-    val state by viewModel.state.collectAsState()
     val context = LocalContext.current
 
     var username by remember { mutableStateOf("") }
@@ -77,7 +84,7 @@ fun RegisterScreen(
             ) {
                 IconButton(onClick = onNavigateBack) {
                     Icon(
-                        imageVector = Icons.Default.ArrowBack,
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                         contentDescription = "Back"
                     )
                 }
@@ -145,7 +152,7 @@ fun RegisterScreen(
                 Spacer(modifier = Modifier.height(24.dp))
 
                 Button(
-                    onClick = { viewModel.register(username, fullName, email, password) },
+                    onClick = { onRegister(username, fullName, email, password) },
                     modifier = Modifier.fillMaxWidth(),
                     enabled = state !is RegisterState.Loading
                 ) {
@@ -159,4 +166,15 @@ fun RegisterScreen(
             )
         }
     }
+}
+
+@Preview
+@Composable
+fun RegisterScreenPreview() {
+    RegisterScreen(
+        state = RegisterState.Success,
+        onRegister = { _, _, _, _ -> },
+        onRegisterSuccess = {},
+        onNavigateBack = {}
+    )
 }

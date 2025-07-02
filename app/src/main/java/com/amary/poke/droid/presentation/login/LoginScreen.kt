@@ -17,7 +17,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -27,16 +26,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.amary.poke.droid.presentation.components.ProgressDialog
 
 @Composable
 fun LoginScreen(
-    viewModel: LoginViewModel,
+    state: LoginState,
+    onLogin: (userName: String, password: String) -> Unit,
     onLoginSuccess: () -> Unit,
     onNavigateToRegister: () -> Unit = {}
 ) {
-    val state by viewModel.state.collectAsState()
     val context = LocalContext.current
 
     var username by remember { mutableStateOf("") }
@@ -100,7 +100,7 @@ fun LoginScreen(
                 Spacer(modifier = Modifier.height(24.dp))
 
                 Button(
-                    onClick = { viewModel.login(username, password) },
+                    onClick = { onLogin(username, password) },
                     modifier = Modifier.fillMaxWidth(),
                     enabled = state !is LoginState.Loading
                 ) {
@@ -123,4 +123,14 @@ fun LoginScreen(
             )
         }
     }
+}
+
+@Preview
+@Composable
+fun LoginScreenPreview() {
+    LoginScreen(
+        state = LoginState.Success,
+        onLogin = { _, _ -> },
+        onLoginSuccess = {}
+    )
 }

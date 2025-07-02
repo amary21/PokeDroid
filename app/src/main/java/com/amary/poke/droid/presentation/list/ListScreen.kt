@@ -22,6 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.amary.poke.droid.domain.model.ResultModel
 import com.amary.poke.droid.presentation.components.ProgressDialog
@@ -117,4 +118,24 @@ fun PokemonItem(
             style = MaterialTheme.typography.bodyLarge
         )
     }
+}
+
+@Preview
+@Composable
+fun ListScreenPreview() {
+    ListScreen(
+        state = ListState.Success(
+            listOf(
+                ResultModel(
+                    name = "Bulbasaur",
+                    url = "https://pokeapi.co/api/v2/pokemon/1/"
+                ),
+                ResultModel(
+                    name = "Charmander",
+                    url = "https://pokeapi.co/api/v2/pokemon/4/"
+                )
+            )
+        ),
+        onItemClick = {}
+    )
 }

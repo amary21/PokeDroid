@@ -1,5 +1,7 @@
 package com.amary.poke.droid.presentation.register
 
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
@@ -15,9 +17,11 @@ fun NavGraphBuilder.registerScreen(
 ) {
     composable(route = RegisterRoute.ROUTE) {
         val viewModel: RegisterViewModel = koinViewModel()
+        val state by viewModel.state.collectAsState()
         
         RegisterScreen(
-            viewModel = viewModel,
+            state = state,
+            onRegister = viewModel::register,
             onRegisterSuccess = onRegisterSuccess,
             onNavigateBack = onNavigateBack
         )
