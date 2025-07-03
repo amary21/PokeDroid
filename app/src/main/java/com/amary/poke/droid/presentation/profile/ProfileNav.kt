@@ -12,7 +12,8 @@ internal object ProfileRoute {
 }
 
 fun NavGraphBuilder.profileScreen(
-    onNavigateBack: () -> Unit
+    onNavigateBack: () -> Unit,
+    onNavigateToLogin: () -> Unit
 ) {
     composable(route = ProfileRoute.ROUTE) {
         val viewModel: ProfileViewModel = koinViewModel()
@@ -22,6 +23,7 @@ fun NavGraphBuilder.profileScreen(
             state = state,
             onGetProfile = viewModel::getProfile,
             onTapLogout = viewModel::logout,
+            onLogout = onNavigateToLogin,
             onNavigateBack = onNavigateBack
         )
     }

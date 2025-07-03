@@ -53,7 +53,8 @@ fun AppNavigation(modifier: Modifier = Modifier) {
             onNavigateToProfile = navController::navigateToProfile
         )
         profileScreen(
-            onNavigateBack = navController::navigateToLogin
+            onNavigateToLogin = navController::navigateToLogin,
+            onNavigateBack = navController::popBackStack
         )
     }
 }
