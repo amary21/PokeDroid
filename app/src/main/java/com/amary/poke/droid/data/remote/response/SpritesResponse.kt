@@ -16,6 +16,4 @@ data class SpritesResponse(
     val frontShiny: String?,
     @SerialName("other")
     val other: OtherResponse?,
-    @SerialName("versions")
-    val versions: VersionsResponse?
 )

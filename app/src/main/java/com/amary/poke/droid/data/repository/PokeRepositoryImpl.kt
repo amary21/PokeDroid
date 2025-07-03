@@ -4,8 +4,10 @@ import com.amary.poke.droid.data.local.dao.PokeDao
 import com.amary.poke.droid.data.local.entity.AuthEntity
 import com.amary.poke.droid.data.local.entity.ResultEntity
 import com.amary.poke.droid.data.local.entity.UserEntity
+import com.amary.poke.droid.data.mapper.DetailMapper
 import com.amary.poke.droid.data.remote.api.PokeApi
 import com.amary.poke.droid.domain.model.AuthModel
+import com.amary.poke.droid.domain.model.DetailModel
 import com.amary.poke.droid.domain.model.ResultModel
 import com.amary.poke.droid.domain.model.UserModel
 import com.amary.poke.droid.domain.repository.PokeRepository
@@ -22,6 +24,12 @@ class PokeRepositoryImpl(
                 url = it.url.orEmpty()
             )
         }.orEmpty()
+    }
+
+    override suspend fun getPokemonDetail(name: String): DetailModel {
+        val response = pokeApi.getPokemonDetail(name)
+        val model = DetailMapper.INSTANCE.toModel(response)
+        return model
     }
 
     override suspend fun listLocalPokemon(): List<ResultModel> {

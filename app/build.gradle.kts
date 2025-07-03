@@ -3,7 +3,12 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.ksp)
+}
+
+kapt {
+    correctErrorTypes = true
 }
 
 android {
@@ -74,4 +79,8 @@ dependencies {
     implementation(libs.koin.core)
     implementation(libs.koin.android)
     implementation(libs.koin.androidx.compose)
+
+    //Mapper
+    implementation(libs.mapstruct)
+    kapt(libs.mapstruct.processor)
 }

@@ -8,5 +8,4 @@ data class SpritesModel(
     val frontDefault: String = "",
     val frontShiny: String = "",
     val other: OtherModel = OtherModel(),
-    val versions: VersionsModel = VersionsModel(),
 )

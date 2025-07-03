@@ -14,8 +14,6 @@ data class DetailResponse(
     val cries: CriesResponse?,
     @SerialName("forms")
     val forms: List<FormResponse>?,
-    @SerialName("game_indices")
-    val gameIndices: List<GameIndiceResponse>?,
     @SerialName("height")
     val height: Int?,
     @SerialName("held_items")
@@ -32,8 +30,6 @@ data class DetailResponse(
     val name: String?,
     @SerialName("order")
     val order: Int?,
-    @SerialName("past_abilities")
-    val pastAbilities: List<PastAbilityResponse>?,
     @SerialName("species")
     val species: SpeciesResponse?,
     @SerialName("sprites")
