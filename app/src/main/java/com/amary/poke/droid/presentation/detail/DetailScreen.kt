@@ -62,7 +62,7 @@ fun DetailScreen(
                     )
                 }
                 is DetailState.Success -> {
-                    val user = (state as DetailState.Success).data
+                    val data = (state as DetailState.Success).data
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -91,7 +91,7 @@ fun DetailScreen(
                                     fontWeight = FontWeight.Bold
                                 )
                                 Text(
-                                    text = user.name,
+                                    text = data.name,
                                     style = MaterialTheme.typography.bodyLarge
                                 )
 
@@ -103,7 +103,7 @@ fun DetailScreen(
                                     fontWeight = FontWeight.Bold
                                 )
                                 Text(
-                                    text = user.height.toString(),
+                                    text = data.height.toString(),
                                     style = MaterialTheme.typography.bodyLarge
                                 )
 
@@ -115,7 +115,7 @@ fun DetailScreen(
                                     fontWeight = FontWeight.Bold
                                 )
                                 Text(
-                                    text = user.weight.toString(),
+                                    text = data.weight.toString(),
                                     style = MaterialTheme.typography.bodyLarge
                                 )
 
@@ -127,7 +127,7 @@ fun DetailScreen(
                                     fontWeight = FontWeight.Bold
                                 )
                                 Text(
-                                    text = user.order.toString(),
+                                    text = data.order.toString(),
                                     style = MaterialTheme.typography.bodyLarge
                                 )
 
@@ -139,7 +139,7 @@ fun DetailScreen(
                                     fontWeight = FontWeight.Bold
                                 )
                                 Text(
-                                    text = user.baseExperience.toString(),
+                                    text = data.baseExperience.toString(),
                                     style = MaterialTheme.typography.bodyLarge
                                 )
 
@@ -151,7 +151,7 @@ fun DetailScreen(
                                     fontWeight = FontWeight.Bold
                                 )
                                 Text(
-                                    text = user.locationAreaEncounters,
+                                    text = data.locationAreaEncounters,
                                     style = MaterialTheme.typography.bodyLarge
                                 )
                             }
@@ -169,6 +169,7 @@ fun DetailScreen(
                             .align(Alignment.Center)
                     )
                 }
+                is DetailState.Initial -> {}
             }
         }
     }

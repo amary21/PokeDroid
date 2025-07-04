@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 class DetailViewModel(
     private val detailUseCase: DetailUseCase
 ): ViewModel() {
-    private val _state = MutableStateFlow<DetailState>(DetailState.Loading)
+    private val _state = MutableStateFlow<DetailState>(DetailState.Initial)
     val state = _state.asStateFlow()
 
     fun getDetail(name: String) {
