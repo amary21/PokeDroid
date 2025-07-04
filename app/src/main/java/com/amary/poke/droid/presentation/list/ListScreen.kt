@@ -32,7 +32,7 @@ fun ListScreen(
 ) {
 
     LaunchedEffect(key1 = Unit) {
-        onGetListItem(20)
+        onGetListItem(10)
     }
 
     Box(modifier = Modifier.fillMaxSize()) {
@@ -81,7 +81,7 @@ fun PokemonList(
         itemsIndexed(items) { index, item ->
             PokemonItem(item = item, onItemClick = onItemClick)
 
-            if (index == lastIndex && offset > 20) {
+            if (index == lastIndex && offset > 10) {
                 onGetListItem(offset)
             }
         }

@@ -27,7 +27,7 @@ class PokeRepositoryImpl(
             ?.split("&")
             ?.firstOrNull { it.startsWith("offset=") }
             ?.substringAfter("=")
-            ?.toIntOrNull() ?: 20
+            ?.toIntOrNull() ?: 10
         return PokeModel(
             next = offset,
             result = response.result?.map {

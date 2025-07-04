@@ -11,11 +11,11 @@ class ListPokemonUseCase(
     operator fun invoke(offset: Int): Flow<Result<PokeModel>> = flow {
         try {
             val remote  = repository.listPokemon(
-                limit = 20,
+                limit = 10,
                 offset = offset
             )
 
-            if (offset == 20) { repository.deletePokemon() }
+            if (offset == 10) { repository.deletePokemon() }
             repository.savePokemon(remote.result)
 
             val model = repository.listLocalPokemon().distinctBy { it.name }
