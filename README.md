@@ -34,6 +34,10 @@ The project follows a clean architecture approach with the following components:
 ## API Reference
 This application uses the [PokeAPI](https://pokeapi.co), a RESTful API providing Pokémon data. The API is free to use and does not require authentication.
 
+## Result
+
+https://github.com/user-attachments/assets/7317ef22-3e60-42f2-b99d-4cd1ae68ea12
+
 ## License
 This project is created for educational purposes as part of a technical test for CODE.id.
 

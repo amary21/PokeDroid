@@ -56,7 +56,7 @@ fun HomeScreen(
 
     var searchQuery by remember { mutableStateOf("") }
     var isSearchActive by remember { mutableStateOf(false) }
-    
+
     BackHandler {  }
 
     Scaffold(
