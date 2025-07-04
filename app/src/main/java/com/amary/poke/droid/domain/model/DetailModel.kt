@@ -1,6 +1,7 @@
 package com.amary.poke.droid.domain.model
 
 data class DetailModel(
+    val abilities: List<AbilitiesModel> = emptyList(),
     val baseExperience: Int = 0,
     val height: Int = 0,
     val id: Int = 0,

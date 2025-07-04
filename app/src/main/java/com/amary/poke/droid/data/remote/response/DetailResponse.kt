@@ -6,6 +6,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class DetailResponse(
+    @SerialName("abilities")
+    val abilities: List<AbilitiesResponse>?,
     @SerialName("base_experience")
     val baseExperience: Int?,
     @SerialName("height")

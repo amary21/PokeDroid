@@ -5,6 +5,8 @@ import com.amary.poke.droid.data.local.entity.AuthEntity
 import com.amary.poke.droid.data.local.entity.ResultEntity
 import com.amary.poke.droid.data.local.entity.UserEntity
 import com.amary.poke.droid.data.remote.api.PokeApi
+import com.amary.poke.droid.domain.model.AbilitiesModel
+import com.amary.poke.droid.domain.model.AbilityModel
 import com.amary.poke.droid.domain.model.AuthModel
 import com.amary.poke.droid.domain.model.DetailModel
 import com.amary.poke.droid.domain.model.PokeModel
@@ -28,6 +30,7 @@ class PokeRepositoryImpl(
             ?.firstOrNull { it.startsWith("offset=") }
             ?.substringAfter("=")
             ?.toIntOrNull() ?: 10
+
         return PokeModel(
             next = offset,
             result = response.result?.map {
@@ -42,6 +45,18 @@ class PokeRepositoryImpl(
     override suspend fun getPokemonDetail(name: String): DetailModel {
         val response = pokeApi.getPokemonDetail(name)
         return DetailModel(
+            abilities = response.abilities?.map {
+                AbilitiesModel(
+                    ability = it.ability?.let { ability ->
+                        AbilityModel(
+                            name = ability.name.orEmpty(),
+                            url = ability.url.orEmpty()
+                        )
+                    } ?: AbilityModel(),
+                    isHidden = it.isHidden ?: false,
+                    slot = it.slot ?: 0
+                )
+            }.orEmpty(),
             baseExperience = response.baseExperience ?: 0,
             height = response.height ?: 0,
             id = response.id ?: 0,
