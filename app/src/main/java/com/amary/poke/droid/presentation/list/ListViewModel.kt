@@ -20,7 +20,7 @@ class ListViewModel(
         ).collect { result ->
             _state.value = ListState.Loading
             result.onSuccess {
-                _state.value = ListState.Success(it)
+                _state.value = ListState.Success(it.result)
             }.onFailure { exception ->
                 _state.value = ListState.Error(exception.message.toString())
             }

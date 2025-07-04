@@ -2,6 +2,7 @@ package com.amary.poke.droid.domain.repository
 
 import com.amary.poke.droid.domain.model.AuthModel
 import com.amary.poke.droid.domain.model.DetailModel
+import com.amary.poke.droid.domain.model.PokeModel
 import com.amary.poke.droid.domain.model.ResultModel
 import com.amary.poke.droid.domain.model.UserModel
 
@@ -9,7 +10,7 @@ interface PokeRepository {
     suspend fun listPokemon(
         limit: Int,
         offset: Int
-    ): List<ResultModel>
+    ): PokeModel
 
     suspend fun getPokemonDetail(name: String): DetailModel
 

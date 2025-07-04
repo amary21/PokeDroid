@@ -7,6 +7,7 @@ import com.amary.poke.droid.data.local.entity.UserEntity
 import com.amary.poke.droid.data.remote.api.PokeApi
 import com.amary.poke.droid.domain.model.AuthModel
 import com.amary.poke.droid.domain.model.DetailModel
+import com.amary.poke.droid.domain.model.PokeModel
 import com.amary.poke.droid.domain.model.ResultModel
 import com.amary.poke.droid.domain.model.UserModel
 import com.amary.poke.droid.domain.repository.PokeRepository
@@ -19,14 +20,23 @@ class PokeRepositoryImpl(
     override suspend fun listPokemon(
         limit: Int,
         offset: Int
-    ): List<ResultModel> {
+    ): PokeModel {
         val response = pokeApi.getPokemon(limit, offset)
-        return response.result?.map {
-            ResultModel(
-                name = it.name.orEmpty(),
-                url = it.url.orEmpty()
-            )
-        }.orEmpty()
+        val offset = response.next
+            ?.substringAfter("?")
+            ?.split("&")
+            ?.firstOrNull { it.startsWith("offset=") }
+            ?.substringAfter("=")
+            ?.toIntOrNull() ?: 20
+        return PokeModel(
+            next = offset,
+            result = response.result?.map {
+                ResultModel(
+                    name = it.name.orEmpty(),
+                    url = it.url.orEmpty()
+                )
+            }.orEmpty()
+        )
     }
 
     override suspend fun getPokemonDetail(name: String): DetailModel {
