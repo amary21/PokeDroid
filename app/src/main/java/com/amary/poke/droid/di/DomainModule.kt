@@ -1,6 +1,7 @@
 package com.amary.poke.droid.di
 
 import com.amary.poke.droid.domain.usecase.AuthUseCase
+import com.amary.poke.droid.domain.usecase.DetailUseCase
 import com.amary.poke.droid.domain.usecase.ListPokemonUseCase
 import com.amary.poke.droid.domain.usecase.LoginUseCase
 import com.amary.poke.droid.domain.usecase.LogoutUseCase
@@ -15,4 +16,5 @@ val domainModule = module {
     factory { ProfileUseCase(get()) }
     factory { RegisterUseCase(get()) }
     factory { AuthUseCase(get()) }
+    factory { DetailUseCase(get()) }
 }

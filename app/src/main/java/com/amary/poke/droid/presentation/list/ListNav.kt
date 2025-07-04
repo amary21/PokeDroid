@@ -13,7 +13,8 @@ internal object ListRoute {
 }
 
 fun NavGraphBuilder.listScreen(
-    onNavigateToProfile: () -> Unit = {}
+    onNavigateToProfile: () -> Unit = {},
+    onNavigateToDetail: (name: String) -> Unit = {}
 ) {
     composable(route = ListRoute.ROUTE) {
         val viewModel: ListViewModel = koinViewModel()
@@ -25,7 +26,7 @@ fun NavGraphBuilder.listScreen(
 
         ListScreen(
             state = state,
-            onItemClick = { /* Handle item click */ },
+            onItemClick = { onNavigateToDetail(it.name) },
             onNavigateToProfile = onNavigateToProfile
         )
     }

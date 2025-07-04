@@ -9,6 +9,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
+import com.amary.poke.droid.presentation.detail.detailScreen
+import com.amary.poke.droid.presentation.detail.navigateToDetail
 import com.amary.poke.droid.presentation.list.listScreen
 import com.amary.poke.droid.presentation.list.navigateToList
 import com.amary.poke.droid.presentation.login.LoginRoute
@@ -50,10 +52,14 @@ fun AppNavigation(modifier: Modifier = Modifier) {
             onNavigateBack = navController::popBackStack
         )
         listScreen(
-            onNavigateToProfile = navController::navigateToProfile
+            onNavigateToProfile = navController::navigateToProfile,
+            onNavigateToDetail = navController::navigateToDetail
         )
         profileScreen(
             onNavigateToLogin = navController::navigateToLogin,
+            onNavigateBack = navController::popBackStack
+        )
+        detailScreen(
             onNavigateBack = navController::popBackStack
         )
     }
