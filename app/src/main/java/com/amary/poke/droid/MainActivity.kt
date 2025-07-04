@@ -11,15 +11,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.amary.poke.droid.presentation.detail.detailScreen
 import com.amary.poke.droid.presentation.detail.navigateToDetail
-import com.amary.poke.droid.presentation.list.listScreen
-import com.amary.poke.droid.presentation.list.navigateToList
+import com.amary.poke.droid.presentation.home.homeScreen
+import com.amary.poke.droid.presentation.home.navigateToHome
 import com.amary.poke.droid.presentation.login.LoginRoute
 import com.amary.poke.droid.presentation.login.loginScreen
 import com.amary.poke.droid.presentation.login.navigateToLogin
-import com.amary.poke.droid.presentation.profile.profileScreen
-import com.amary.poke.droid.presentation.profile.navigateToProfile
-import com.amary.poke.droid.presentation.register.registerScreen
 import com.amary.poke.droid.presentation.register.navigateToRegister
+import com.amary.poke.droid.presentation.register.registerScreen
 import com.amary.poke.droid.presentation.theme.PokeDroidTheme
 
 class MainActivity : ComponentActivity() {
@@ -44,20 +42,16 @@ fun AppNavigation(modifier: Modifier = Modifier) {
         modifier = modifier
     ) {
         loginScreen(
-            onLoginSuccess = navController::navigateToList,
+            onLoginSuccess = navController::navigateToHome,
             onNavigateToRegister = navController::navigateToRegister
         )
         registerScreen(
             onRegisterSuccess = navController::navigateToLogin,
             onNavigateBack = navController::popBackStack
         )
-        listScreen(
-            onNavigateToProfile = navController::navigateToProfile,
-            onNavigateToDetail = navController::navigateToDetail
-        )
-        profileScreen(
+        homeScreen(
             onNavigateToLogin = navController::navigateToLogin,
-            onNavigateBack = navController::popBackStack
+            onNavigateToDetail = navController::navigateToDetail
         )
         detailScreen(
             onNavigateBack = navController::popBackStack

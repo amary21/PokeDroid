@@ -19,6 +19,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
@@ -31,55 +32,40 @@ import com.amary.poke.droid.presentation.components.ProgressDialog
 @Composable
 fun ListScreen(
     state: ListState,
+    onGetListItem: () -> Unit = {},
     onItemClick: (ResultModel) -> Unit,
-    onNavigateToProfile: () -> Unit = {}
 ) {
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text("Pokémon List") },
-                actions = {
-                    IconButton(onClick = onNavigateToProfile) {
-                        Icon(
-                            imageVector = Icons.Default.Person,
-                            contentDescription = "Profile"
-                        )
-                    }
-                }
-            )
-        }
-    ) { paddingValues ->
-        Box(
-            modifier = Modifier
-                .padding(paddingValues)
-                .fillMaxSize()
-        ) {
-            when (state) {
-                is ListState.Loading -> {
-                    ProgressDialog(
-                        isShowing = true,
-                        message = "Loading Pokémon..."
-                    )
-                }
 
-                is ListState.Success -> {
-                    PokemonList(
-                        items = state.list,
-                        onItemClick = onItemClick
-                    )
-                }
+    LaunchedEffect(key1 = Unit) {
+        onGetListItem()
+    }
 
-                is ListState.Error -> {
-                    Text(
-                        text = state.message,
-                        color = MaterialTheme.colorScheme.error,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = 16.dp)
-                            .align(Alignment.Center)
-                    )
-                }
+    Box(modifier = Modifier.fillMaxSize()) {
+        when (state) {
+            is ListState.Loading -> {
+                ProgressDialog(
+                    isShowing = true,
+                    message = "Loading Pokémon..."
+                )
+            }
+
+            is ListState.Success -> {
+                PokemonList(
+                    items = state.list,
+                    onItemClick = onItemClick
+                )
+            }
+
+            is ListState.Error -> {
+                Text(
+                    text = state.message,
+                    color = MaterialTheme.colorScheme.error,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp)
+                        .align(Alignment.Center)
+                )
             }
         }
     }
