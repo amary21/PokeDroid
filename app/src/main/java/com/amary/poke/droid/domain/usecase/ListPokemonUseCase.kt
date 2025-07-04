@@ -14,11 +14,17 @@ class ListPokemonUseCase(
                 limit = 20,
                 offset = offset
             )
-            emit(Result.success(remote))
+
+            if (offset == 20) { repository.deletePokemon() }
+            repository.savePokemon(remote.result)
+
+            val model = repository.listLocalPokemon().distinctBy { it.name }
+            emit(Result.success(PokeModel(result = model, next = remote.next)))
+
         } catch (e: Exception) {
-            val local = repository.listLocalPokemon()
-            if (local.isNotEmpty()) {
-                emit(Result.success(PokeModel(result = local, next = offset)))
+            val model = repository.listLocalPokemon().distinctBy { it.name }
+            if (model.isNotEmpty()) {
+                emit(Result.success(PokeModel(result = model, next = offset)))
             } else {
                 emit(Result.failure(Exception(e.localizedMessage)))
             }
