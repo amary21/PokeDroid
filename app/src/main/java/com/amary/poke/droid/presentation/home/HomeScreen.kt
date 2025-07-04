@@ -1,5 +1,6 @@
 package com.amary.poke.droid.presentation.home
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -55,6 +56,8 @@ fun HomeScreen(
 
     var searchQuery by remember { mutableStateOf("") }
     var isSearchActive by remember { mutableStateOf(false) }
+    
+    BackHandler {  }
 
     Scaffold(
         topBar = {
