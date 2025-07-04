@@ -32,12 +32,12 @@ import com.amary.poke.droid.presentation.components.ProgressDialog
 @Composable
 fun ListScreen(
     state: ListState,
-    onGetListItem: () -> Unit = {},
+    onGetListItem: (offset: Int) -> Unit = {},
     onItemClick: (ResultModel) -> Unit,
 ) {
 
     LaunchedEffect(key1 = Unit) {
-        onGetListItem()
+        onGetListItem(20)
     }
 
     Box(modifier = Modifier.fillMaxSize()) {

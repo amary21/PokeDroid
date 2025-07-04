@@ -6,7 +6,10 @@ import com.amary.poke.droid.domain.model.ResultModel
 import com.amary.poke.droid.domain.model.UserModel
 
 interface PokeRepository {
-    suspend fun listPokemon(): List<ResultModel>
+    suspend fun listPokemon(
+        limit: Int,
+        offset: Int
+    ): List<ResultModel>
 
     suspend fun getPokemonDetail(name: String): DetailModel
 

@@ -44,7 +44,7 @@ fun HomeScreen(
     profileState: ProfileState,
     detailState: DetailState,
     onGetDetail: (name: String) -> Unit = {},
-    onGetListItem: () -> Unit = {},
+    onGetListItem: (offset: Int) -> Unit = {},
     onGetProfile: () -> Unit = {},
     onTapLogout: () -> Unit = {},
     onNavigateToDetail: (name: String) -> Unit = {},

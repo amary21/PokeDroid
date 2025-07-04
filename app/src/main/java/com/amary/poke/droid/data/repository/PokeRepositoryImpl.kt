@@ -16,8 +16,11 @@ class PokeRepositoryImpl(
     private val pokeApi: PokeApi,
     private val pokeDao: PokeDao
 ): PokeRepository {
-    override suspend fun listPokemon(): List<ResultModel> {
-        val response = pokeApi.getPokemon()
+    override suspend fun listPokemon(
+        limit: Int,
+        offset: Int
+    ): List<ResultModel> {
+        val response = pokeApi.getPokemon(limit, offset)
         return response.result?.map {
             ResultModel(
                 name = it.name.orEmpty(),

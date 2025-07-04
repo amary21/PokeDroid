@@ -14,8 +14,10 @@ class ListViewModel(
     private val _state = MutableStateFlow<ListState>(ListState.Loading)
     val state = _state.asStateFlow()
 
-    fun getList() = viewModelScope.launch {
-        listPokemonUseCase.invoke().collect { result ->
+    fun getList(offset: Int) = viewModelScope.launch {
+        listPokemonUseCase.invoke(
+            offset = offset
+        ).collect { result ->
             _state.value = ListState.Loading
             result.onSuccess {
                 _state.value = ListState.Success(it)

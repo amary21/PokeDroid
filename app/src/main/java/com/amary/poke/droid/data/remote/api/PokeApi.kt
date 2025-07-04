@@ -4,10 +4,14 @@ import com.amary.poke.droid.data.remote.response.DetailResponse
 import com.amary.poke.droid.data.remote.response.PokeResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface PokeApi {
     @GET("pokemon")
-    suspend fun getPokemon(): PokeResponse
+    suspend fun getPokemon(
+        @Query("limit") limit: Int,
+        @Query("offset") offset: Int
+    ): PokeResponse
 
     @GET("pokemon/{name}")
     suspend fun getPokemonDetail(

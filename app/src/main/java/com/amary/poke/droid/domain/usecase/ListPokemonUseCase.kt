@@ -8,9 +8,12 @@ import kotlinx.coroutines.flow.flow
 class ListPokemonUseCase(
     private val repository: PokeRepository
 ) {
-    operator fun invoke(): Flow<Result<List<ResultModel>>> = flow {
+    operator fun invoke(offset: Int): Flow<Result<List<ResultModel>>> = flow {
         try {
-            val remote  = repository.listPokemon()
+            val remote  = repository.listPokemon(
+                limit = 20,
+                offset = offset
+            )
             emit(Result.success(remote))
         } catch (e: Exception) {
             val local = repository.listLocalPokemon()
