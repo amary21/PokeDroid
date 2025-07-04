@@ -4,13 +4,13 @@ import com.amary.poke.droid.data.local.dao.PokeDao
 import com.amary.poke.droid.data.local.entity.AuthEntity
 import com.amary.poke.droid.data.local.entity.ResultEntity
 import com.amary.poke.droid.data.local.entity.UserEntity
-import com.amary.poke.droid.data.mapper.DetailMapper
 import com.amary.poke.droid.data.remote.api.PokeApi
 import com.amary.poke.droid.domain.model.AuthModel
 import com.amary.poke.droid.domain.model.DetailModel
 import com.amary.poke.droid.domain.model.ResultModel
 import com.amary.poke.droid.domain.model.UserModel
 import com.amary.poke.droid.domain.repository.PokeRepository
+import kotlin.Int
 
 class PokeRepositoryImpl(
     private val pokeApi: PokeApi,
@@ -28,8 +28,16 @@ class PokeRepositoryImpl(
 
     override suspend fun getPokemonDetail(name: String): DetailModel {
         val response = pokeApi.getPokemonDetail(name)
-        val model = DetailMapper.INSTANCE.toModel(response)
-        return model
+        return DetailModel(
+            baseExperience = response.baseExperience ?: 0,
+            height = response.height ?: 0,
+            id = response.id ?: 0,
+            isDefault = response.isDefault ?: false,
+            locationAreaEncounters = response.locationAreaEncounters ?: "",
+            name = response.name ?: "",
+            order = response.order ?: 0,
+            weight = response.weight ?: 0,
+        )
     }
 
     override suspend fun listLocalPokemon(): List<ResultModel> {
